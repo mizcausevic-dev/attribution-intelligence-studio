@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contribution View</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Aptos", "Avenir Next", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(244, 63, 94, 0.2), transparent 25%),
+          linear-gradient(180deg, #090d18 0%, #0f172a 60%, #111827 100%);
+        color: #f8fafc;
+      }
+
+      .frame {
+        width: 1600px;
+        height: 900px;
+        padding: 42px;
+        box-sizing: border-box;
+      }
+
+      .card {
+        height: 100%;
+        border-radius: 32px;
+        padding: 32px;
+        background: rgba(15, 23, 42, 0.88);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .kicker {
+        color: #fda4af;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-size: 13px;
+      }
+
+      h1 {
+        margin: 8px 0 14px;
+        font-family: Georgia, serif;
+        font-size: 52px;
+      }
+
+      p {
+        color: #cbd5e1;
+        max-width: 760px;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.85fr;
+        gap: 24px;
+        margin-top: 26px;
+      }
+
+      .panel {
+        border-radius: 24px;
+        background: rgba(17, 24, 39, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        padding: 22px;
+      }
+
+      .bars {
+        display: grid;
+        gap: 18px;
+        margin-top: 26px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 160px 1fr 80px;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .track {
+        height: 28px;
+        background: rgba(30, 41, 59, 0.9);
+        border-radius: 999px;
+        overflow: hidden;
+        display: flex;
+      }
+
+      .sourced {
+        background: linear-gradient(90deg, #7c3aed, #a855f7);
+      }
+
+      .influenced {
+        background: linear-gradient(90deg, #22d3ee, #38bdf8);
+      }
+
+      .alert {
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(30, 41, 59, 0.72);
+        margin-bottom: 14px;
+      }
+
+      .alert strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="card">
+        <div class="kicker">Channel quality</div>
+        <h1>Contribution analysis that changes investment decisions.</h1>
+        <p>
+          The studio separates sourced revenue from influenced revenue so operators can see which channels create direct
+          pipeline, which ones amplify deals later, and where efficiency is strong enough to justify budget movement.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <div class="bars">
+              <div class="row">
+                <span>Organic</span>
+                <div class="track"><div class="sourced" style="width: 22%"></div><div class="influenced" style="width: 54%"></div></div>
+                <strong>78</strong>
+              </div>
+              <div class="row">
+                <span>Partner</span>
+                <div class="track"><div class="sourced" style="width: 46%"></div><div class="influenced" style="width: 38%"></div></div>
+                <strong>71</strong>
+              </div>
+              <div class="row">
+                <span>Paid Search</span>
+                <div class="track"><div class="sourced" style="width: 28%"></div><div class="influenced" style="width: 44%"></div></div>
+                <strong>63</strong>
+              </div>
+              <div class="row">
+                <span>Lifecycle</span>
+                <div class="track"><div class="sourced" style="width: 12%"></div><div class="influenced" style="width: 34%"></div></div>
+                <strong>84</strong>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="alert">
+              <strong>Organic search assists exceed board assumptions</strong>
+              SEO influence is underrepresented in current planning language even though quality is compounding.
+            </div>
+            <div class="alert">
+              <strong>Lifecycle email is efficient but underfunded</strong>
+              Low-cost influenced pipeline suggests budget should shift, not just reporting labels.
+            </div>
+            <div class="alert">
+              <strong>Partner influence needs territory recalibration</strong>
+              Attribution logic should follow the revised EMEA routing model before quarter close.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
