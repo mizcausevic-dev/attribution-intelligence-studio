@@ -12,7 +12,8 @@ This log is intentionally written as an engineering record rather than a launch 
 - Tightened the repo story around the real-world operating problem: dual-write drift, event-order ambiguity, and poor downstream explainability in high-value operational systems.
 
 ### Why this mattered
-- Existing approaches in stream processors, BI dashboards, and generic messaging infrastructure were useful, but they solved transport, but not the operational need for exactly-once semantics, replay confidence, and business-legible evidence.
+- Existing approaches in stream processors, BI dashboards, and generic messaging infrastructure were useful for adjacent workflows.
+- They still missed the core need: an operating model for exactly-once behavior, replay confidence, and business-legible event evidence.
 - This release made the repo readable as an operational capability rather than a narrow technical demo.
 
 ## [0.1.0] - 2026-02-14
