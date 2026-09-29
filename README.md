@@ -1,8 +1,8 @@
 # Attribution Intelligence Studio
 
-> **React + TypeScript portfolio project** demonstrating multi-touch attribution analysis, growth decisioning, experiment interpretation, and executive-facing frontend systems design.
+> **React + TypeScript portfolio demo** showing an interface for attribution analysis, experiment interpretation, and growth decisions. All business figures are synthetic.
 
-**Recruiter takeaway:** *"This person can turn messy growth analytics into a decision surface leadership can actually use."*
+**Recruiter takeaway:** *"This person can make complex growth data easier for leadership to inspect."*
 
 ---
 
@@ -13,7 +13,7 @@
 | **Frontend Stack** | React 19 + Vite + TypeScript |
 | **Domain** | Attribution modeling, experiment interpretation, growth operations |
 | **Audience** | Growth leadership, RevOps, demand gen, executive stakeholders |
-| **Signal Areas** | Sourced pipeline · influenced revenue · experiment lift · channel efficiency |
+| **Signal Areas** | Sourced pipeline · assisted pipeline · experiment lift · channel efficiency |
 | **Portfolio Role** | Frontend flagship for revenue and analytics workflow design |
 | **Validation** | Vitest + Testing Library |
 
@@ -21,7 +21,7 @@
 
 ## Executive Summary
 
-Attribution Intelligence Studio is a recruiter-ready frontend project built to feel like a premium internal growth operating system. Instead of showing generic charts, it frames attribution as an executive decision layer: which channels actually create pipeline, which models shift the narrative, and which experiment outcomes deserve rollout.
+Attribution Intelligence Studio is a frontend portfolio demo of a growth decision workspace. It shows how an operator could compare channel contribution, attribution models, and experiment scenarios in one view.
 
 It is designed to show that growth analytics can be productized with the same seriousness as platform tooling.
 
@@ -29,13 +29,13 @@ It is designed to show that growth analytics can be productized with the same se
 
 ## Business Problem
 
-Attribution reporting often lives in fragmented slide decks, ad-platform exports, and disputed spreadsheets. Teams struggle to reconcile sourced pipeline, assisted influence, and experiment lift into one clear operating view. Leadership needs a system that explains what is working, where confidence is high, and what action should happen next.
+Attribution reporting often lives in fragmented slide decks, ad-platform exports, and disputed spreadsheets. Teams struggle to reconcile sourced pipeline, assisted influence, and experiment lift into one clear operating view. Leadership needs a system that explains what is working, what evidence supports it, and what action should happen next.
 
 ---
 
 ## Solution
 
-This studio turns attribution into a coordinated frontend surface for:
+This demo presents a coordinated frontend surface for:
 
 - channel contribution and efficiency analysis
 - model comparison across the journey
@@ -65,31 +65,21 @@ React application shell
 
 ### Workspace Flow
 
-1. Leadership lands on a single executive signal layer.
-2. Contribution charts reveal which channels source and influence revenue.
+1. A visitor sees the synthetic-data notice and executive signal layer.
+2. Contribution charts compare exclusive sourced and assisted pipeline categories.
 3. Model comparison exposes where first-touch and multi-touch narratives diverge.
-4. Experiment outcome panels convert lift into rollout decisions.
-5. Workflow alerts highlight where attribution interpretation should change planning.
+4. Experiment panels show illustrative lift and decisions, without a statistical claim.
+5. Sample alerts show how attribution interpretation could change planning.
+
+### Demo data and limits
+
+The values in `src/data.ts` are hand-authored fixtures. No customer data, live analytics, API, statistical estimator, or experiment history feeds the page. Sourced pipeline and assisted pipeline are modeled as exclusive categories; the efficiency index is a sample score from 0 to 100. The three model series are synthetic percentage allocations across journey stages. Experiment lift values have no sample sizes or statistical analysis behind them. The figures should not be used for business decisions.
 
 ---
 
-## Screenshots
+## Design artifacts
 
-### Hero Capture
-
-![Attribution Intelligence Studio hero](screenshots/01-hero.png)
-
-### Contribution and Workflow View
-
-![Contribution and workflow](screenshots/02-contribution.png)
-
-### Model and Lift Comparison
-
-![Model and lift comparison](screenshots/03-comparison.png)
-
-### Validation Proof
-
-![Validation proof](screenshots/04-proof.png)
+The files in [`screenshots/`](screenshots/README.md) are initial design concepts from May 2026. They are not current application captures or test evidence. Run the app to inspect the current interface.
 
 ---
 
@@ -118,7 +108,7 @@ React application shell
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 24 (recommended), 22.12+ within the 22.x line, or 20.19+ within the 20.x line
 - npm
 
 ### Setup
@@ -126,8 +116,7 @@ React application shell
 ```bash
 git clone https://github.com/mizcausevic-dev/attribution-intelligence-studio.git
 cd attribution-intelligence-studio
-npm install
-cp .env.example .env
+npm ci
 npm run dev
 ```
 
@@ -166,6 +155,12 @@ npm run build
 - export views for board and planning narratives
 - benchmark overlays for efficiency and spend quality
 - API-backed experiment history and confidence tracking
+
+## Static hosting
+
+`npm run build` writes `dist/`. Vite uses relative asset paths so GitHub Pages can serve the build from this repository's subpath. The Pages workflow tests and builds on pushes to `main`, then uploads `dist/` with only the deployment job granted Pages and OIDC permissions. Enable **GitHub Pages → Build and deployment → Source: GitHub Actions** in repository settings before the first deployment.
+
+Public URL after a successful deployment: `https://mizcausevic-dev.github.io/attribution-intelligence-studio/`. Check the workflow result and the live URL before treating it as shipped. To restore a prior release, re-run its successful **Deploy Pages** workflow run; GitHub re-runs use the original commit SHA. Then verify the public URL again. For the first release, there is no older Pages artifact, so rollback means unpublishing the site or reverting the release on `main` and deploying a corrected build.
 
 ---
 

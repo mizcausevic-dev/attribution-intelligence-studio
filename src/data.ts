@@ -7,19 +7,25 @@ import {
   WorkflowAlert
 } from "./types";
 
-export const executiveSignals: ExecutiveSignal[] = [
-  { label: "Attributed Pipeline", value: "$8.4M", delta: "+14% QoQ", tone: "positive" },
-  { label: "Organic Influence Share", value: "31%", delta: "+5 pts", tone: "positive" },
-  { label: "Partner-Sourced Revenue", value: "$2.1M", delta: "SLA drift in EMEA", tone: "watch" },
-  { label: "Decision Confidence", value: "92", delta: "Model stable", tone: "neutral" }
+// Hand-authored synthetic fixture. No values are derived from customer data or a statistical estimator.
+export const channelContribution: ChannelContribution[] = [
+  { channel: "Paid Search", sourced: 1.2, assisted: 2.9, efficiency: 63 },
+  { channel: "Organic Search", sourced: 0.9, assisted: 3.5, efficiency: 78 },
+  { channel: "Partner", sourced: 2.1, assisted: 2.4, efficiency: 71 },
+  { channel: "Lifecycle Email", sourced: 0.5, assisted: 1.6, efficiency: 84 },
+  { channel: "Executive Events", sourced: 1.0, assisted: 2.7, efficiency: 67 }
 ];
 
-export const channelContribution: ChannelContribution[] = [
-  { channel: "Paid Search", sourced: 1.2, influenced: 2.9, efficiency: 63 },
-  { channel: "Organic Search", sourced: 0.9, influenced: 3.5, efficiency: 78 },
-  { channel: "Partner", sourced: 2.1, influenced: 2.4, efficiency: 71 },
-  { channel: "Lifecycle Email", sourced: 0.5, influenced: 1.6, efficiency: 84 },
-  { channel: "Executive Events", sourced: 1.0, influenced: 2.7, efficiency: 67 }
+const sourcedPipeline = channelContribution.reduce((sum, item) => sum + item.sourced, 0);
+const assistedPipeline = channelContribution.reduce((sum, item) => sum + item.assisted, 0);
+const organic = channelContribution.find((item) => item.channel === "Organic Search")!;
+const partner = channelContribution.find((item) => item.channel === "Partner")!;
+
+export const executiveSignals: ExecutiveSignal[] = [
+  { label: "Sourced Pipeline", value: `$${sourcedPipeline.toFixed(1)}M`, delta: "Across five demo channels", tone: "positive" },
+  { label: "Organic Assist Share", value: `${Math.round((organic.assisted / assistedPipeline) * 100)}%`, delta: "Share of assisted pipeline", tone: "positive" },
+  { label: "Partner-Sourced Pipeline", value: `$${partner.sourced.toFixed(1)}M`, delta: "Synthetic partner scenario", tone: "watch" },
+  { label: "Channels Modeled", value: String(channelContribution.length), delta: "Sample data only", tone: "neutral" }
 ];
 
 export const journeyStages: JourneyStage[] = [
@@ -31,10 +37,10 @@ export const journeyStages: JourneyStage[] = [
 ];
 
 export const experimentLift: ExperimentLift[] = [
-  { experiment: "Guided pricing CTA", region: "North America", lift: 18, confidence: 95, decision: "Scale this sprint" },
-  { experiment: "Partner handoff form", region: "EMEA", lift: 9, confidence: 83, decision: "Tune routing logic" },
-  { experiment: "Content intent path", region: "Global", lift: 14, confidence: 91, decision: "Promote to control" },
-  { experiment: "Enterprise social proof", region: "APAC", lift: 5, confidence: 68, decision: "Needs more data" }
+  { experiment: "Guided pricing CTA", region: "North America", lift: 18, decision: "Review for scale" },
+  { experiment: "Partner handoff form", region: "EMEA", lift: 9, decision: "Investigate routing" },
+  { experiment: "Content intent path", region: "Global", lift: 14, decision: "Compare with control" },
+  { experiment: "Enterprise social proof", region: "APAC", lift: 5, decision: "Collect more data" }
 ];
 
 export const workflowAlerts: WorkflowAlert[] = [
@@ -61,14 +67,14 @@ export const workflowAlerts: WorkflowAlert[] = [
 export const storyPanels: StoryPanel[] = [
   {
     heading: "Attribution for operators, not vanity dashboards",
-    body: "This studio is designed to help growth, RevOps, and leadership teams decide where revenue really comes from and which channels deserve more investment."
+    body: "This portfolio demo shows how growth, RevOps, and leadership teams could examine contribution before making investment decisions."
   },
   {
     heading: "Model comparison without executive confusion",
     body: "First-touch, W-shaped, and pipeline-share views are presented side by side so teams can challenge assumptions without losing narrative clarity."
   },
   {
-    heading: "Workflow proof, not marketing theater",
-    body: "Alerts, experiment outcomes, and efficiency views are surfaced like operating signals that can trigger routing, planning, and budget action."
+    heading: "Illustrative workflow signals",
+    body: "Sample alerts, experiment outcomes, and efficiency views show how operators could connect evidence with routing, planning, and budget action."
   }
 ];

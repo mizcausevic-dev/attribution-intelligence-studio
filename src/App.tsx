@@ -1,6 +1,5 @@
 import {
   Area,
-  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
@@ -32,22 +31,30 @@ const liftColors = ["#fb7185", "#f59e0b", "#38bdf8", "#8b5cf6"];
 
 function App() {
   return (
-    <div className="page-shell">
+    <main className="page-shell">
       <header className="hero">
         <div className="hero-copy">
           <p className="eyebrow">Attribution Intelligence Studio</p>
-          <h1>Executive-grade attribution that translates channel complexity into investment decisions.</h1>
+          <h1>See which channels earn the next growth dollar.</h1>
           <p className="hero-text">
-            A frontend flagship for growth operators who need clearer attribution, sharper experiment
-            interpretation, and a more credible board-level revenue narrative.
+            Explore how channel contribution, attribution models, and experiments can support clearer
+            growth decisions.
+          </p>
+          <p className="demo-notice" role="note">
+            <strong>Illustrative portfolio demo.</strong> All figures, alerts, and
+            recommendations are synthetic. No live customer data is used.
           </p>
           <div className="hero-chips">
             <span>Revenue systems</span>
             <span>Experiment decisioning</span>
             <span>Attribution governance</span>
           </div>
+          <div className="hero-actions">
+            <a href="https://github.com/mizcausevic-dev/attribution-intelligence-studio">View source</a>
+            <a href="https://www.linkedin.com/in/mirzacausevic">Contact Miz</a>
+          </div>
         </div>
-        <div className="hero-diagram" aria-label="Attribution flow diagram">
+        <div className="hero-diagram" role="img" aria-label="Sources feed a decision layer, which informs budget, partner, and board actions">
           <div className="diagram-column">
             <span className="column-label">Sources</span>
             <div>Organic</div>
@@ -64,7 +71,7 @@ function App() {
           <div className="diagram-column strong">
             <span className="column-label">Decision Layer</span>
             <div>Model comparison</div>
-            <div>Lift confidence</div>
+            <div>Experiment readout</div>
             <div>Pipeline narrative</div>
           </div>
           <div className="diagram-connector right">
@@ -96,11 +103,11 @@ function App() {
           <div className="panel-heading">
             <div>
               <p className="panel-kicker">Channel quality</p>
-              <h2>Revenue influence by sourced vs assisted contribution</h2>
+              <h2>Sourced and assisted pipeline by channel</h2>
             </div>
-            <span className="panel-note">USD millions · efficiency index overlay</span>
+            <span className="panel-note">Synthetic USD millions · exclusive source and assist categories · efficiency index 0–100</span>
           </div>
-          <div className="chart-frame">
+          <div className="chart-frame" aria-hidden="true">
             <ResponsiveContainer width="100%" height={320}>
               <ComposedChart data={channelContribution}>
                 <CartesianGrid stroke="rgba(148, 163, 184, 0.16)" vertical={false} />
@@ -115,12 +122,24 @@ function App() {
                   }}
                 />
                 <Legend />
-                <Bar yAxisId="left" dataKey="sourced" stackId="a" fill="#7c3aed" radius={[8, 8, 0, 0]} />
-                <Bar yAxisId="left" dataKey="influenced" stackId="a" fill="#22d3ee" radius={[8, 8, 0, 0]} />
-                <Line yAxisId="right" type="monotone" dataKey="efficiency" stroke="#f97316" strokeWidth={3} />
+                <Bar yAxisId="left" dataKey="sourced" name="Sourced ($M)" stackId="a" fill="#7c3aed" radius={[8, 8, 0, 0]} isAnimationActive={false} />
+                <Bar yAxisId="left" dataKey="assisted" name="Assisted ($M)" stackId="a" fill="#22d3ee" radius={[8, 8, 0, 0]} isAnimationActive={false} />
+                <Line yAxisId="right" type="monotone" dataKey="efficiency" name="Efficiency index" stroke="#f97316" strokeWidth={3} isAnimationActive={false} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
+          <details className="data-details">
+            <summary>View channel data</summary>
+            <div className="table-scroll">
+              <table>
+                <caption>Synthetic channel contribution. Sourced and assisted pipeline are exclusive categories.</caption>
+                <thead><tr><th scope="col">Channel</th><th scope="col">Sourced ($M)</th><th scope="col">Assisted ($M)</th><th scope="col">Efficiency index</th></tr></thead>
+                <tbody>{channelContribution.map((item) => (
+                  <tr key={item.channel}><th scope="row">{item.channel}</th><td>{item.sourced}</td><td>{item.assisted}</td><td>{item.efficiency}</td></tr>
+                ))}</tbody>
+              </table>
+            </div>
+          </details>
         </article>
 
         <article className="panel table-panel">
@@ -153,9 +172,9 @@ function App() {
               <h2>Where attribution stories change across the journey</h2>
             </div>
           </div>
-          <div className="chart-frame compact">
+          <div className="chart-frame compact" aria-hidden="true">
             <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={journeyStages}>
+              <ComposedChart data={journeyStages}>
                 <defs>
                   <linearGradient id="firstTouch" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#fb7185" stopOpacity={0.65} />
@@ -177,26 +196,38 @@ function App() {
                   }}
                 />
                 <Legend />
-                <Area type="monotone" dataKey="firstTouch" stroke="#fb7185" fill="url(#firstTouch)" strokeWidth={3} />
-                <Area type="monotone" dataKey="wShaped" stroke="#38bdf8" fill="url(#wShaped)" strokeWidth={3} />
-                <Line type="monotone" dataKey="pipelineShare" stroke="#f59e0b" strokeWidth={3} />
-              </AreaChart>
+                <Area type="monotone" dataKey="firstTouch" name="First touch (%)" stroke="#fb7185" fill="url(#firstTouch)" strokeWidth={3} isAnimationActive={false} />
+                <Area type="monotone" dataKey="wShaped" name="W-shaped (%)" stroke="#38bdf8" fill="url(#wShaped)" strokeWidth={3} isAnimationActive={false} />
+                <Line type="monotone" dataKey="pipelineShare" name="Pipeline share (%)" stroke="#f59e0b" strokeWidth={3} isAnimationActive={false} />
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
+          <details className="data-details">
+            <summary>View model comparison data</summary>
+            <div className="table-scroll">
+              <table>
+                <caption>Synthetic share by journey stage and attribution view, in percent.</caption>
+                <thead><tr><th scope="col">Stage</th><th scope="col">First touch</th><th scope="col">W-shaped</th><th scope="col">Pipeline share</th></tr></thead>
+                <tbody>{journeyStages.map((item) => (
+                  <tr key={item.stage}><th scope="row">{item.stage}</th><td>{item.firstTouch}%</td><td>{item.wShaped}%</td><td>{item.pipelineShare}%</td></tr>
+                ))}</tbody>
+              </table>
+            </div>
+          </details>
         </article>
 
         <article className="panel chart-panel">
           <div className="panel-heading">
             <div>
               <p className="panel-kicker">Experiment outcomes</p>
-              <h2>Rollout decisions backed by lift confidence</h2>
+              <h2>Illustrative lift and possible next steps</h2>
             </div>
           </div>
-          <div className="chart-frame compact">
+          <div className="chart-frame compact" aria-hidden="true">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={experimentLift} layout="vertical" margin={{ left: 12, right: 24 }}>
                 <CartesianGrid stroke="rgba(148, 163, 184, 0.16)" horizontal={false} />
-                <XAxis type="number" stroke="#94a3b8" tickLine={false} axisLine={false} />
+                <XAxis type="number" unit="%" stroke="#94a3b8" tickLine={false} axisLine={false} />
                 <YAxis
                   type="category"
                   dataKey="experiment"
@@ -212,7 +243,7 @@ function App() {
                     borderRadius: "18px"
                   }}
                 />
-                <Bar dataKey="lift" radius={[0, 12, 12, 0]}>
+                <Bar dataKey="lift" name="Lift (%)" radius={[0, 12, 12, 0]} isAnimationActive={false}>
                   {experimentLift.map((entry, index) => (
                     <Cell key={entry.experiment} fill={liftColors[index % liftColors.length]} />
                   ))}
@@ -220,11 +251,23 @@ function App() {
               </BarChart>
             </ResponsiveContainer>
           </div>
+          <details className="data-details">
+            <summary>View experiment data and decisions</summary>
+            <div className="table-scroll">
+              <table>
+                <caption>Synthetic experiment lift and possible actions. No sample size or statistical analysis is provided.</caption>
+                <thead><tr><th scope="col">Experiment</th><th scope="col">Region</th><th scope="col">Lift</th><th scope="col">Possible action</th></tr></thead>
+                <tbody>{experimentLift.map((item) => (
+                  <tr key={item.experiment}><th scope="row">{item.experiment}</th><td>{item.region}</td><td>{item.lift}%</td><td>{item.decision}</td></tr>
+                ))}</tbody>
+              </table>
+            </div>
+          </details>
           <div className="decision-strip">
             {experimentLift.map((item) => (
               <div key={item.experiment} className="decision-card">
                 <strong>{item.experiment}</strong>
-                <span>{item.confidence}% confidence</span>
+                <span>{item.lift}% sample lift</span>
                 <p>{item.decision}</p>
               </div>
             ))}
@@ -240,7 +283,7 @@ function App() {
           </article>
         ))}
       </section>
-    </div>
+    </main>
   );
 }
 
