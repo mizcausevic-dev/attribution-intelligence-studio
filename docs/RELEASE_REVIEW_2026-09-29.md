@@ -51,3 +51,9 @@ R2, public static portfolio surface. Main risks are misleading business claims, 
 - 2026-09-29: Local defects corrected and the affected checks rerun. The original line-ending-only checkout was preserved.
 - Decision: keep the page explicitly a synthetic portfolio demo; do not imply validated attribution or experiment statistics.
 - Outcome: local code gates pass; deployment remains blocked on target-specific verification and remote CI for the unmerged changes.
+
+## Release continuation: 2026-09-29
+
+Miz authorized the next release step after the initial review. GitHub Pages was selected for this public, static, repository-backed portfolio demo. It needs no application runtime, customer-data store, or new paid service. The repository did not have a Pages site when checked; the expected project URL returned GitHub Pages 404. A `main`-only workflow now tests, builds, uploads `dist/`, and deploys with separate minimal job permissions. The earlier no-deploy scope and blocked outcome above describe the first review phase, not this continuation.
+
+Release sequence: push this review branch, open a PR, wait for both Node versions in remote CI, merge only after checks pass, configure Pages for GitHub Actions, confirm the deployment workflow and public URL, and record the live smoke and rollback evidence here. Before the first successful Pages deployment, there is no previous Pages artifact to restore. Its fallback is to unpublish the site or revert the release commit and deploy a corrected build. Later releases can re-run a prior successful deployment workflow run, which uses its original commit SHA.

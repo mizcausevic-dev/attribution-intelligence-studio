@@ -29,7 +29,7 @@ It is designed to show that growth analytics can be productized with the same se
 
 ## Business Problem
 
-Attribution reporting often lives in fragmented slide decks, ad-platform exports, and disputed spreadsheets. Teams struggle to reconcile sourced pipeline, assisted influence, and experiment lift into one clear operating view. Leadership needs a system that explains what is working, where confidence is high, and what action should happen next.
+Attribution reporting often lives in fragmented slide decks, ad-platform exports, and disputed spreadsheets. Teams struggle to reconcile sourced pipeline, assisted influence, and experiment lift into one clear operating view. Leadership needs a system that explains what is working, what evidence supports it, and what action should happen next.
 
 ---
 
@@ -158,7 +158,9 @@ npm run build
 
 ## Static hosting
 
-`npm run build` writes `dist/`. Vite uses relative asset paths so the same build can be served from a domain root or a repository subpath. Choose a host and verify the built page at its final URL before calling it deployed. This repo has no deployment workflow or configured production target.
+`npm run build` writes `dist/`. Vite uses relative asset paths so GitHub Pages can serve the build from this repository's subpath. The Pages workflow tests and builds on pushes to `main`, then uploads `dist/` with only the deployment job granted Pages and OIDC permissions. Enable **GitHub Pages → Build and deployment → Source: GitHub Actions** in repository settings before the first deployment.
+
+Public URL after a successful deployment: `https://mizcausevic-dev.github.io/attribution-intelligence-studio/`. Check the workflow result and the live URL before treating it as shipped. To restore a prior release, re-run its successful **Deploy Pages** workflow run; GitHub re-runs use the original commit SHA. Then verify the public URL again. For the first release, there is no older Pages artifact, so rollback means unpublishing the site or reverting the release on `main` and deploying a corrected build.
 
 ---
 
