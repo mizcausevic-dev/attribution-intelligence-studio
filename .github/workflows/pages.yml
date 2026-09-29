@@ -38,5 +38,6 @@ jobs:
       pages: write
       id-token: write
     steps:
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
