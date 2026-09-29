@@ -8,7 +8,7 @@ export type ExecutiveSignal = {
 export type ChannelContribution = {
   channel: string;
   sourced: number;
-  influenced: number;
+  assisted: number;
   efficiency: number;
 };
 
@@ -23,7 +23,6 @@ export type ExperimentLift = {
   experiment: string;
   region: string;
   lift: number;
-  confidence: number;
   decision: string;
 };
 

@@ -59,9 +59,9 @@ body {
 .hero h1 {
   margin: 0;
   font-family: "Iowan Old Style", "Georgia", serif;
-  font-size: clamp(2.6rem, 4vw, 4.6rem);
+  font-size: clamp(2.5rem, 3.5vw, 4rem);
   line-height: 1.02;
-  max-width: 11ch;
+  max-width: 19ch;
 }
 
 .hero-text {
@@ -75,6 +75,42 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.demo-notice {
+  max-width: 62ch;
+  padding: 12px 16px;
+  border-left: 3px solid #67e8f9;
+  background: rgba(14, 116, 144, 0.12);
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.hero-actions a {
+  display: inline-block;
+  padding: 11px 16px;
+  border: 1px solid #67e8f9;
+  border-radius: 999px;
+  color: #cffafe;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero-actions a:hover {
+  background: rgba(103, 232, 249, 0.14);
+}
+
+.hero-actions a:focus-visible,
+.data-details summary:focus-visible {
+  outline: 3px solid #fda4af;
+  outline-offset: 3px;
 }
 
 .hero-chips span,
@@ -187,6 +223,7 @@ body {
 }
 
 .panel {
+  min-width: 0;
   padding: 26px;
   border-radius: 28px;
   border: 1px solid rgba(148, 163, 184, 0.14);
@@ -215,10 +252,54 @@ body {
 
 .chart-frame {
   height: 320px;
+  overflow: hidden;
 }
 
 .chart-frame.compact {
   height: 300px;
+}
+
+.data-details {
+  margin-top: 14px;
+  color: #e2e8f0;
+}
+
+.data-details summary {
+  width: fit-content;
+  cursor: pointer;
+  color: #67e8f9;
+  font-weight: 700;
+}
+
+.table-scroll {
+  max-width: 100%;
+  margin-top: 14px;
+  overflow-x: auto;
+}
+
+.data-details table {
+  width: 100%;
+  min-width: 510px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.data-details caption {
+  margin-bottom: 10px;
+  color: #cbd5e1;
+  text-align: left;
+}
+
+.data-details th,
+.data-details td {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+  white-space: nowrap;
+}
+
+.data-details thead th {
+  color: #fda4af;
 }
 
 .alert-list,
@@ -235,6 +316,15 @@ body {
   border-radius: 20px;
   background: rgba(17, 24, 39, 0.88);
   border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.decision-card strong {
+  display: block;
+}
+
+.decision-card span {
+  display: inline-block;
+  margin-top: 10px;
 }
 
 .alert-header {
@@ -270,12 +360,9 @@ body {
   }
 
   .hero-diagram {
-    grid-template-columns: 1fr;
-  }
-
-  .diagram-connector {
     display: none;
   }
+
 }
 
 @media (max-width: 720px) {
@@ -288,6 +375,19 @@ body {
     padding: 20px;
   }
 
+  .hero-chips {
+    display: none;
+  }
+
+  .chart-frame {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .chart-frame > .recharts-responsive-container {
+    min-width: 520px !important;
+  }
+
   .panel-heading {
     flex-direction: column;
     align-items: flex-start;
@@ -295,5 +395,11 @@ body {
 
   .decision-strip {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 2.2rem;
   }
 }
